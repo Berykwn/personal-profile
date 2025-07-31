@@ -1,96 +1,68 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import CodeIcon from '@/app/components/icons/code';
 import { WORKJOURNEY } from '../data/work-journey';
 
 export default function WorkJourney() {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-  const itemRefs = useRef<(HTMLElement | null)[]>([]);
-
-  useEffect(() => {
-    if (expandedIndex !== null && itemRefs.current[expandedIndex]) {
-      itemRefs.current[expandedIndex]?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-      });
-    }
-  }, [expandedIndex]);
-
   return (
-    <ul className="relative w-full max-w-lg space-y-2" aria-label="Work Experience List">
-      {WORKJOURNEY.map((job, index) => {
-        const isExpanded = expandedIndex === index;
-        const panelId = `job-panel-${index}`;
-        const headingId = `job-title-${index}`;
-
-        return (
+    <div className="mx-auto max-w-xl">
+      <ul className="relative">
+        {WORKJOURNEY.map((job, index) => (
           <li key={index}>
-            <motion.article
-              layout
-              ref={(el) => {
-                itemRefs.current[index] = el;
-              }}
-              className={`border-b border-neutral-300 dark:border-neutral-600 py-4 transition-all hover:rounded-xl hover:px-5 ${isExpanded ? 'bg-tranparent px-5 rounded-xl border border-neutral-300' : ''
-                } hover:bg-neutral-50 dark:hover:bg-neutral-800 cursor-pointer`}
-            >
-              <header
-                className="flex justify-between items-center cursor-pointer"
-                onClick={() => setExpandedIndex(isExpanded ? null : index)}
-                aria-expanded={isExpanded}
-                aria-controls={panelId}
-                id={headingId}
-              >
-                <h2 className="text-base font-semibold text-neutral-800 dark:text-neutral-100">
-                  {job.title}
-                </h2>
-                <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.3 }}>
-                  <svg width="15px" height="15px" viewBox="0 0 1024 1024" className="icon" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M903.232 256l56.768 50.432L512 768 64 306.432 120.768 256 512 659.072z"
-                      fill="#000000"
-                    />
-                  </svg>
-                </motion.div>
-              </header>
+            <div className="relative pb-8">
+              {index !== WORKJOURNEY.length - 1 && (
+                <span
+                  aria-hidden="true"
+                  className="absolute top-5 left-5 -ml-px h-full w-[1px] bg-neutral-200 dark:bg-neutral-700"
+                />
+              )}
 
-              <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{job.description}</p>
+              <div className="relative flex items-start space-x-3">
+                <div className="relative px-1">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-teal-500 ring-8 ring-teal-50 dark:ring-neutral-900">
+                    <CodeIcon />
+                  </div>
+                </div>
 
-              <AnimatePresence initial={false}>
-                {isExpanded && (
-                  <motion.section
-                    key="content"
-                    id={panelId}
-                    role="region"
-                    aria-labelledby={headingId}
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.4, ease: 'easeInOut' }}
-                    className="overflow-hidden mt-4 space-y-3"
-                  >
-                    <div className="flex flex-wrap gap-2">
-                      {job.skills.map((skill, i) => (
-                        <span key={i} className="text-xs bg-amber-200 text-neutral-700 px-2.5 py-0.5 rounded-full">
+                <div className="flex-1 min-w-0 py-0">
+                  <header>
+                    <div className="flex flex-wrap items-center">
+                      <span className="mr-2 font-medium text-neutral-900 dark:text-neutral-100">
+                        {job.title}
+                      </span>
+                    </div>
+
+                    {job.date && (
+                      <span className="text-xs whitespace-nowrap text-neutral-400">
+                        {job.date}
+                      </span>
+                    )}
+                  </header>
+
+                  {job.description && (
+                    <div className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
+                      <p>{job.description}</p>
+                    </div>
+                  )}
+
+                  {job.skills?.length ? (
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {job.skills.map((skill: string, i: number) => (
+                        <span
+                          key={i}
+                          className="rounded-full bg-amber-200 px-2.5 py-0.5 text-xs text-neutral-700"
+                        >
                           {skill}
                         </span>
                       ))}
                     </div>
-                    <ul className="list-disc list-inside text-sm space-y-1.5 text-neutral-700 dark:text-neutral-300">
-                      {job.responsibilities.map((res, i) => (
-                        <li key={i}>
-                          <span className="font-medium">{res.title}</span> – {res.detail}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="text-xs text-neutral-500 dark:text-neutral-400">{job.date}</div>
-                  </motion.section>
-                )}
-              </AnimatePresence>
-            </motion.article>
+                  ) : null}
+                </div>
+              </div>
+            </div>
           </li>
-        );
-      })}
-    </ul>
+        ))}
+      </ul>
+    </div>
   );
 }

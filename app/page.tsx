@@ -18,7 +18,7 @@ export default function Home() {
           <div className="flex gap-x-3 mt-1">
             <span className="relative flex size-3 mt-0.75" aria-hidden="true">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[rgba(255,215,0,0.4)] opacity-75"></span>
-              <span className="relative inline-flex size-3 rounded-full bg-yellow-400 shadow-[0_0_10px_rgba(255,215,0,0.7)]"></span>
+              <span className="relative inline-flex size-3 rounded-full bg-orange-300 shadow-[0_0_10px_rgba(255,215,0,0.7)]"></span>
             </span>
             <p className="text-sm text-neutral-500 dark:text-neutral-400">
               Junior Software Engineer

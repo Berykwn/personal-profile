@@ -1,6 +1,6 @@
 export const WORKJOURNEY = [
   {
-    title: 'IT Staff Development at PT. Priamanaya Energi',
+    title: 'IT Development at PT. Priamanaya Energi',
     date: 'February 2025 - Present',
     description:
       'Developing and optimizing IBM Maximo applications to enhance operational efficiency and support data-driven decision-making.',
