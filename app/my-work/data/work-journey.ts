@@ -1,90 +1,34 @@
 export const WORKJOURNEY = [
   {
-    title: 'IT Development at PT. Priamanaya Energi',
-    date: 'February 2025 - Present',
+    period: ["Feb 2025", "Present"],
+    company: "PT. Priamanaya Energi",
+    role: "Software Engineer — App Development",
     description:
-      'Developing and optimizing IBM Maximo applications to enhance operational efficiency and support data-driven decision-making.',
-    responsibilities: [
-      {
-        title: 'Workflow & Process Automation',
-        detail: 'Automated business processes, reducing manual tasks and improving operational efficiency across departments.',
-      },
-      {
-        title: 'Work Order & Purchasing Systems',
-        detail: 'Enhanced work order and purchasing modules to support better asset lifecycle tracking and procurement flow.',
-      },
-      {
-        title: 'Data Handling & Reporting',
-        detail: 'Built complex SQL queries and custom BIRT reports to deliver actionable insights in real-time.',
-      },
-    ],
-    skills: ['IBM Maximo', 'Javascript', 'Jython', 'BIRT', 'SQL DB2'],
+      "Turned a manual, error-prone reporting chain into a structured digital system for PLTU Keban Agung — automated templates, hierarchical access control, standardized Excel exports. Built custom IBM Maximo modules that brought procurement and maintenance workflows under one roof. Integrated work order and purchasing systems with BIRT reporting for real management visibility.",
+    skills: ["Laravel", "Reactjs", "Inertia" , "IBM Maximo", "Java", "Jython", "BIRT", "SQL DB2", "Postgre SQL"],
   },
   {
-    title: 'Software Engineer at Atara SaQT Group.',
-    date: 'Juni 2024 - February 2025',
+    period: ["Jun 2024", "Feb 2025"],
+    company: "Atara SaQT Group",
+    role: "Software Engineer",
     description:
-      'Built robust Point-of-Sale (POS) solutions—including cashier and self-checkout systems—handling both backend and frontend development for high-traffic retail environments.',
-    responsibilities: [
-      {
-        title: 'Backend Development',
-        detail: 'Developed RESTful APIs with Laravel to support seamless transaction flows and promotions.',
-      },
-      {
-        title: 'Frontend Development',
-        detail: 'Implemented cashier and self-checkout apps using Angular & Ionic, integrating discount logic, store events, and voucher systems.',
-      },
-      {
-        title: 'Log & Automation Report',
-        detail: 'Automated transaction logging and reporting for business analytics and operational insights.',
-      },
-      {
-        title: 'Financial Analytics & Reporting',
-        detail: 'Generated finance dashboards and end-of-day reports used for daily reconciliation.',
-      },
-    ],
-    skills: ['Typescript', 'Angular', 'Ionic', 'Laravel', 'MySQL'],
+      "Built the checkout backbone for a leading retail chain in Malaysia — cashier and self-checkout flows that replaced slow, manual processes. Integrated Laravel APIs with Angular/Ionic interfaces; added promotions, vouchers, and event features that drove customer engagement. Replaced manual reporting with automated transaction insights for operational teams.",
+    skills: ["TypeScript", "Angular", "Ionic", "Laravel", "MySQL"],
   },
   {
-    title: 'Freelance Frontend Developer at SOFTMEDIA.ID',
-    date: 'Aug 2024 – Mar 2025',
+    period: ["Aug 2024", "Jan 2025"],
+    company: "SOFTMEDIA.ID",
+    role: "Frontend Developer — Freelance",
     description:
-      'Designed and built a modern e-commerce platform with real-time auction features, multivendor checkout, and integrated chat system to elevate user engagement and transactions.',
-    responsibilities: [
-      {
-        title: 'Auction & Marketplace Features',
-        detail: 'Developed real-time bidding and dynamic product listings with robust category and filter options.',
-      },
-      {
-        title: 'Integrated Messaging System',
-        detail: 'Built end-to-end buyer-seller chat with persistence, read-status, and notification support.',
-      },
-      {
-        title: 'Multi-Store Checkout Experience',
-        detail: 'Implemented a scalable cart and checkout system supporting multiple vendors in one transaction.',
-      },
-    ],
-    skills: ['Next.js', 'Tailwind CSS', 'Mantine UI'],
+      "Took a US-based auction platform's frontend and made it feel like it belonged there. Rebuilt core user flows with Next.js, revamped auction interactions, and built multistore checkout with multivendor support — delivering a scalable architecture built to grow.",
+    skills: ["Next.js", "React", "Mantine UI", "Tailwind", "Laravel"],
   },
   {
-    title: 'Fullstack Developer Intern at PT. Citiasia Internasional',
-    date: 'Aug 2022 – Jan 2023',
+    period: ["Aug 2022", "Jan 2023"],
+    company: "PT. Citiasia Int'l (Surveyasia.id)",
+    role: "Fullstack Developer — Intern",
     description:
-      'Modernized public-sector digital services by refactoring outdated systems and implementing interactive survey dashboards for nationwide analytics.',
-    responsibilities: [
-      {
-        title: 'Legacy System Migration',
-        detail: 'Refactored Laravel Blade templates into Vue.js components to improve maintainability and UX.',
-      },
-      {
-        title: 'Dynamic Survey Integration',
-        detail: 'Integrated SurveyJS for interactive survey creation and real-time response visualization.',
-      },
-      {
-        title: 'REST API Development',
-        detail: 'Built APIs to streamline survey data storage, access, and visualization across the platform.',
-      },
-    ],
-    skills: ['Laravel', 'Vue.js', 'SurveyJS', 'MySQL'],
+      "Inherited a legacy frontend and left it modern. Independently migrated from Blade to Vue.js with Laravel Mix, integrated SurveyJS for dynamic and interactive survey capabilities, and built supporting RESTful APIs in Laravel — making sure the next developer had less to fix.",
+    skills: ["Vue.js", "Laravel", "Laravel Mix", "Survey JS"],
   },
-]
+];

@@ -1,33 +1,59 @@
-import Link from "next/link";
-import PageWrapper from "../components/page-wrapper";
-import WorkJourney from "./components/work-journey";
+import { WORKJOURNEY } from "./data/work-journey";
 
 export default function MyWork() {
   return (
-    <PageWrapper className="lg:pt-32 lg:pb-16 px-6 pt-28 pb-8 ">
-      <section aria-labelledby="work-heading">
-        <header className="mb-6">
-          <h1
-            id="work-heading"
-            className="text-3xl font-bold text-neutral-600 dark:text-neutral-200"
-          >
-            My Work Journey
-          </h1>
-          <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
-            A glimpse of my past work and projects.{" "}
-            <Link
-              href="/contact"
-              className="text-blue-600 hover:underline dark:text-blue-400"
-            >
-              Let's get in touch.
-            </Link>
-          </p>
-        </header>
+    <div className="max-w-5xl mx-auto px-5 md:px-8 py-12 md:py-16">
+      {/* Header */}
+      <div className="mb-10 md:mb-12">
+        <p className="text-[10px] text-neutral-400 font-mono uppercase tracking-[0.1em] mb-2">
+          Experience
+        </p>
+        <h1 className="text-[24px] md:text-[28px] font-light text-neutral-900 tracking-[-0.03em]">
+          Things I&apos;ve been trusted with.
+        </h1>
+      </div>
 
-        <article>
-          <WorkJourney />
-        </article>
-      </section>
-    </PageWrapper>
+      {/* Jobs */}
+      <div>
+        {WORKJOURNEY.map((job, i) => (
+          <div
+            key={i}
+            className="py-6 border-t border-black/[0.06] last:border-b last:border-black/[0.06]
+                       flex flex-col gap-3
+                       md:grid md:grid-cols-[160px_1fr] md:gap-x-12"
+          >
+            {/* Period + Company — row on mobile */}
+            <div className="flex items-baseline gap-3 md:flex-col md:gap-0 md:pt-0.5">
+              <span className="text-[11px] text-neutral-400 font-mono leading-[1.5]">
+                {job.period[0]} – {job.period[1]}
+              </span>
+              <span className="text-[11.5px] text-neutral-400">
+                {job.company}
+              </span>
+            </div>
+
+            {/* Role + desc + tags */}
+            <div>
+              <h2 className="text-[13.5px] md:text-[14px] font-medium text-neutral-900 mb-2 tracking-[-0.01em]">
+                {job.role}
+              </h2>
+              <p className="text-[12.5px] text-neutral-500 leading-[1.7] mb-3">
+                {job.description}
+              </p>
+              <div className="flex flex-wrap gap-1.5">
+                {job.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="text-[10px] font-mono text-neutral-500 border border-black/[0.1] px-[7px] py-[2px] rounded-[3px]"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }

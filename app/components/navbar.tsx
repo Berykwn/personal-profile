@@ -1,194 +1,115 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import clsx from 'clsx';
-import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { useDarkMode } from '../hooks/use-dark-mode';
-import DarkModeToggle from './dark-mode-toggle';
-import TiltedCard from './tilted-card';
-import { AnimatePresence, motion } from 'framer-motion';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
-const navLinks = [
-    { href: '/', label: 'About me' },
-    { href: '/my-work', label: 'My Work' },
-    { href: '/contact', label: 'Contact' },
+const links = [
+  { href: "/", label: "About" },
+  { href: "/my-work", label: "Work" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
-    const pathname = usePathname();
-    const { isDarkMode, toggleDarkMode } = useDarkMode();
-    const [isScrolled, setIsScrolled] = useState(false);
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
 
-    useEffect(() => {
-        const handleScroll = () => setIsScrolled(window.scrollY > 10);
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+  return (
+    <>
+      <nav className="sticky top-0 z-20 bg-white/95 backdrop-blur-md border-b border-black/[0.06] h-12">
+        <div className="max-w-5xl mx-auto px-5 md:px-8 h-full flex items-center justify-between">
+          {/* Logo */}
+          <Link
+            href="/"
+            className="text-[13.5px] font-medium text-neutral-900 tracking-tight hover:opacity-60 transition-opacity"
+            onClick={() => setOpen(false)}
+          >
+            Berry Kurniawan
+          </Link>
 
-    const isActive = (href: string) => pathname === href;
-
-    const navLinkClass = (href: string) =>
-        clsx(
-            'px-3 py-1 text-sm rounded-md',
-            isActive(href)
-                ? 'bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-white'
-                : 'text-neutral-500 hover:text-neutral-700 dark:text-neutral-300 dark:hover:text-white'
-        );
-
-    return (
-        <header
-            className={clsx(
-                'fixed top-0 left-0 w-full z-50 transition-all duration-300',
-                isScrolled ? 'bg-white shadow-md dark:bg-neutral-900' : 'bg-transparent'
-            )}
-        >
-            <div className="font-[family-name:var(--font-geist-sans)] flex justify-between items-center py-6 px-6 md:px-12">
-                <Link href="/" className="text-lg font-semibold text-neutral-700 dark:text-neutral-200">
-                    Berry Kurniawan.
+          {/* Desktop links */}
+          <div className="hidden md:flex">
+            {links.map(({ href, label }) => {
+              const isActive =
+                href === "/" ? pathname === "/" : pathname.startsWith(href);
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  className={`text-[12.5px] px-3 py-1.5 rounded transition-colors ${
+                    isActive
+                      ? "text-neutral-900 font-medium"
+                      : "text-neutral-400 hover:text-neutral-900"
+                  }`}
+                >
+                  {label}
                 </Link>
+              );
+            })}
+          </div>
 
-                {/* Desktop Nav */}
-                <nav className="hidden md:flex items-center space-x-2">
-                    {navLinks.map(({ href, label }) => (
-                        <Link key={href} href={href} className={navLinkClass(href)}>
-                            {label}
-                        </Link>
-                    ))}
+          {/* Desktop available */}
+          <div className="hidden md:flex items-center gap-1.5 text-[11px] text-neutral-400 font-mono">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+            Available
+          </div>
 
-                    <div className="flex items-center space-x-2 bg-neutral-100 px-2 py-1 rounded-xl border-neutral-300">
-                        <DarkModeToggle isDark={isDarkMode} onToggle={toggleDarkMode} />
-                        <label
-                            onClick={toggleDarkMode}
-                            className="text-xs text-neutral-500 hover:text-neutral-700"
-                        >
-                            {isDarkMode ? 'Dark mode' : 'Light mode'}
-                        </label>
-                    </div>
-                </nav>
-
-                {/* Mobile Menu Toggle */}
-                <div className="flex items-center space-x-3 md:hidden">
-                    <button
-                        onClick={() => setIsMenuOpen((prev) => !prev)}
-                        aria-label={isMenuOpen ? 'Tutup menu' : 'Buka menu'}
-                        className="p-2 rounded-md text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition"
-                    >
-                        {isMenuOpen ? (
-                            /* Ikon Close (X) */
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                className="w-6 h-6"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            >
-                                <line x1="18" y1="6" x2="6" y2="18" />
-                                <line x1="6" y1="6" x2="18" y2="18" />
-                            </svg>
-                        ) : (
-                            /* Ikon Menu (Hamburger) */
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                className="w-6 h-6"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            >
-                                <line x1="3" y1="6" x2="21" y2="6" />
-                                <line x1="3" y1="12" x2="21" y2="12" />
-                                <line x1="3" y1="18" x2="21" y2="18" />
-                            </svg>
-                        )}
-                    </button>
-                </div>
+          {/* Mobile: available dot + hamburger */}
+          <div className="flex md:hidden items-center gap-3">
+            <div className="flex items-center gap-1.5 text-[11px] text-neutral-400 font-mono">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+              Available
             </div>
+            <button
+              onClick={() => setOpen((v) => !v)}
+              aria-label="Toggle menu"
+              className="w-8 h-8 flex flex-col items-center justify-center gap-[5px]"
+            >
+              <span
+                className={`block w-5 h-px bg-neutral-700 transition-all duration-200 origin-center ${
+                  open ? "rotate-45 translate-y-[6px]" : ""
+                }`}
+              />
+              <span
+                className={`block w-5 h-px bg-neutral-700 transition-all duration-200 ${
+                  open ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`block w-5 h-px bg-neutral-700 transition-all duration-200 origin-center ${
+                  open ? "-rotate-45 -translate-y-[6px]" : ""
+                }`}
+              />
+            </button>
+          </div>
+        </div>
+      </nav>
 
-            {/* Mobile Menu */}
-            <AnimatePresence>
-                {isMenuOpen && (
-                    <motion.div
-                        initial={{ y: '-100%', opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: '-100%', opacity: 0 }}
-                        transition={{ duration: 0.3, ease: 'easeOut' }}
-                        className="fixed inset-0 z-50 bg-white dark:bg-neutral-900 flex flex-col"
-                    >
-                        <div className="flex justify-end p-6">
-                            <button
-                                onClick={() => setIsMenuOpen(false)}
-                                aria-label="Tutup menu"
-                                className="p-2 rounded-md text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition"
-                            >
-                                {/* Ikon Close (X) */}
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"
-                                    className="w-6 h-6"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                >
-                                    <line x1="18" y1="6" x2="6" y2="18" />
-                                    <line x1="6" y1="6" x2="18" y2="18" />
-                                </svg>
-                            </button>
-                        </div>
-
-                        <nav className="flex-grow flex flex-col items-center justify-center space-y-4">
-                            <aside
-                                className="relative animate-fire-bounce flex justify-center"
-                                aria-label="Profile picture decoration"
-                            >
-                                <TiltedCard
-                                    imageSrc="/profile-picture-4.png"
-                                    altText="Generate by ChatGPT"
-                                    captionText="Hello, I’m Berry!"
-                                    containerHeight="260px"
-                                    containerWidth="180px"
-                                    imageHeight="260px"
-                                    imageWidth="180px"
-                                    rotateAmplitude={12}
-                                    scaleOnHover={1.2}
-                                    showMobileWarning={false}
-                                    showTooltip={true}
-                                    displayOverlayContent={true}
-                                />
-                            </aside>
-
-                            {navLinks.map(({ href, label }) => (
-                                <Link
-                                    key={href}
-                                    href={href}
-                                    onClick={() => setIsMenuOpen(false)}
-                                    className="text-lg font-medium text-neutral-800 dark:text-neutral-200 hover:underline"
-                                >
-                                    {label}
-                                </Link>
-                            ))}
-
-                            <div className="flex items-center space-x-2 bg-neutral-100 px-4 py-1.5 rounded-xl border-neutral-300">
-                                <DarkModeToggle isDark={isDarkMode} onToggle={toggleDarkMode} />
-                                <label
-                                    onClick={toggleDarkMode}
-                                    className="text-sm text-neutral-500 hover:text-neutral-700"
-                                >
-                                    {isDarkMode ? 'Dark mode' : 'Light mode'}
-                                </label>
-                            </div>
-                        </nav>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </header>
-    );
+      {/* Mobile menu dropdown */}
+      <div
+        className={`md:hidden fixed top-12 left-0 right-0 z-10 bg-white border-b border-black/[0.06] overflow-hidden transition-all duration-200 ${
+          open ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        {links.map(({ href, label }) => {
+          const isActive =
+            href === "/" ? pathname === "/" : pathname.startsWith(href);
+          return (
+            <Link
+              key={href}
+              href={href}
+              onClick={() => setOpen(false)}
+              className={`flex items-center px-5 py-4 text-[14px] border-b border-black/[0.04] last:border-b-0 ${
+                isActive
+                  ? "text-neutral-900 font-medium"
+                  : "text-neutral-400"
+              }`}
+            >
+              {label}
+            </Link>
+          );
+        })}
+      </div>
+    </>
+  );
 }
