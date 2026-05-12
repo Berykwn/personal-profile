@@ -54,6 +54,16 @@ export default function Home() {
               I don&apos;t just build features. I build things people can rely on —
               readable code, sensible architecture, solutions that actually ship.
             </p>
+
+            <div className="mt-6">
+              <Link
+                href="/my-work"
+                className="inline-flex items-center gap-2 text-[13px] text-blue-500 hover:text-blue-900 transition-colors"
+              >
+                See my projects
+                <span aria-hidden="true">→</span>
+              </Link>
+            </div>
           </div>
 
           {/* Social links */}
@@ -107,42 +117,72 @@ export default function Home() {
             <p className="text-[10px] text-neutral-400 font-mono uppercase tracking-[0.1em] mb-3">
               Education
             </p>
-            <p className="text-[12.5px] text-neutral-600 mb-1.5">
-              B.Sc. Information Systems{" "}
-              <span className="text-[11px] text-neutral-400 ml-1">
+
+            <div className="mb-2">
+              <p className="text-[12.5px] text-neutral-600">
+                B.Sc. Information Systems
+              </p>
+              <p className="text-[11px] text-neutral-400">
                 University of Amikom Yogyakarta, 2023
-              </span>
-            </p>
+              </p>
+            </div>
+
+            <div className="mb-2">
+              <p className="text-[12.5px] text-neutral-600">
+                Frontend Engineer Immersive Program
+              </p>
+              <p className="text-[11px] text-neutral-400">
+                Alterra Academy, 2024
+              </p>
+            </div>
+
+            <div className="mb-2">
+              <p className="text-[12.5px] text-neutral-600">
+                Software Engineering
+              </p>
+              <p className="text-[11px] text-neutral-400">
+                SMK Negeri 1 Lahat, 2019
+              </p>
+            </div>
           </div>
 
           <div>
             <p className="text-[10px] text-neutral-400 font-mono uppercase tracking-[0.1em] mb-3">
               Certifications
             </p>
-            <p className="text-[12.5px] text-neutral-600 mb-1.5">
-              Frontend Engineer{" "}
-              <span className="text-[11px] text-neutral-400 ml-1">
-                Alterra Academy, 2024
-              </span>
-            </p>
-            <p className="text-[12.5px] text-neutral-600 mb-1.5">
-              Golang Backend{" "}
-              <span className="text-[11px] text-neutral-400 ml-1">
+
+            <div className="mb-2">
+              <p className="text-[12.5px] text-neutral-600">
+                Frontend Engineer
+              </p>
+              <p className="text-[11px] text-neutral-400">
+                Immersive Program Alterra Academy, 2024
+              </p>
+            </div>
+
+            <div className="mb-2">
+              <p className="text-[12.5px] text-neutral-600">
+                Golang For Backend Engineer
+              </p>
+              <p className="text-[11px] text-neutral-400">
                 Magang dan Studi Independen Bersertifikat (Hacktivate), 2023
-              </span>
-            </p>
-            <p className="text-[12.5px] text-neutral-600 mb-1.5">
-              Fullstack Developer Intern{" "}
-              <span className="text-[11px] text-neutral-400 ml-1">
+              </p>
+            </div>
+
+            <div className="mb-2">
+              <p className="text-[12.5px] text-neutral-600">
+                Fullstack Developer Intern
+              </p>
+              <p className="text-[11px] text-neutral-400">
                 Merdeka Belajar Kampus Merdeka (Citiasia), 2023
-              </span>
-            </p>
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
       {/* ── Skills table: full width ── */}
-      <div className="border-t border-black/[0.07]">
+      {/* <div className="border-t border-black/[0.07]">
         {skills.map(({ cat, list }) => (
           <div
             key={cat}
@@ -154,7 +194,7 @@ export default function Home() {
             <span className="text-neutral-500 leading-relaxed">{list}</span>
           </div>
         ))}
-      </div>
-    </div>
+      </div> */}
+    </div >
   );
 }

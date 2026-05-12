@@ -6,7 +6,7 @@ import { useState } from "react";
 
 const links = [
   { href: "/", label: "About" },
-  { href: "/my-work", label: "Work" },
+  { href: "/my-work", label: "Work & Projects" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -51,14 +51,14 @@ export default function Navbar() {
           {/* Desktop available */}
           <div className="hidden md:flex items-center gap-1.5 text-[11px] text-neutral-400 font-mono">
             <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-            Available
+            Open to opportunities
           </div>
 
           {/* Mobile: available dot + hamburger */}
           <div className="flex md:hidden items-center gap-3">
             <div className="flex items-center gap-1.5 text-[11px] text-neutral-400 font-mono">
               <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-              Available
+              Open to opportunities
             </div>
             <button
               onClick={() => setOpen((v) => !v)}
